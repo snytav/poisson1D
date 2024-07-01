@@ -49,7 +49,7 @@ if torch.cuda.is_available():
   #print(x_space)
   print(x_space.device)
 
-input_point = torch.zeros(2)
+input_point = torch.zeros(1)
 net_out = pde.forward(input_point)
 from auxiliary import psy_trial
 
