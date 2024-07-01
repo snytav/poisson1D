@@ -21,6 +21,8 @@ def compare_to_analytic(x_space,psy_trial,analytic_solution,pde):
     plt.plot(x_space,surface,'o',label='neural',color='red')
     plt.plot(x_space,an_surface,label='analytic',color='green')
     plt.legend()
+    plt.show()
+    plt.savefig('result.png')
     diff = np.abs(an_surface - surface)
     md = np.max(diff)
     where_md = np.where(diff == md)
