@@ -7,8 +7,8 @@ def loss_function(x, y,pde,psy_trial,f):
     loss_sum = 0.
 
     for xi in x:
-        for yi in y:
-            input_point = torch.Tensor([xi, yi])
+
+            input_point = torch.Tensor([xi])
             input_point.requires_grad_()
 
             net_out = pde.forward(input_point)

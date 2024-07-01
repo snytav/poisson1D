@@ -1,29 +1,25 @@
 import numpy as np
 import torch
 from sklearn.metrics import mean_absolute_percentage_error
+import matplotlib.pyplot as plt
 
-
-def compare_to_analytic(x_space,y_space,psy_trial,analytic_solution,pde):
+def compare_to_analytic(x_space,psy_trial,analytic_solution,pde):
     nx = x_space.shape[0]
-    ny = y_space.shape[0]
-    surface = np.zeros((nx,ny))
-    an_surface = np.zeros((nx,ny))
+    surface    = np.zeros(nx)
+    an_surface = np.zeros(nx)
     for i, x in enumerate(x_space):
-        for j, y in enumerate(y_space):
-            input_point = torch.Tensor([x, y])
+            input_point = torch.Tensor([x])
             input_point.requires_grad_()
             net_out = pde.forward(input_point)
 
             psy_t = psy_trial(input_point, net_out)
-            surface[i][j] = psy_t
-            an_surface[i][j] = analytic_solution([x, y])
+            surface[i] = psy_t
+            an_surface[i] = analytic_solution([x])
     diff = np.max(np.abs(surface-an_surface))
     mape = mean_absolute_percentage_error(an_surface, surface)
-
-    from surf_multiplot import plot_2_3D_figures
-    X, Y = np.meshgrid(x_space, y_space)
-    plot_2_3D_figures(X, Y, surface, an_surface, 'Neural', 'Analytic')
-    import numpy as np
+    plt.figure()
+    plt.plot(x_space,surface,label='neural','o',color='red')
+    plt.plot(x_space,an_surface,label='analytic',color='green')
     diff = np.abs(an_surface - surface)
     md = np.max(diff)
     where_md = np.where(diff == md)
