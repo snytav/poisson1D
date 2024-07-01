@@ -61,7 +61,7 @@ train(lmb,x_space,y_space,N_epoch,pde,psy_trial,f)
 
 from compare import compare_to_analytic
 from analytics import analytic_solution
-mape,md,where_md = compare_to_analytic(x_space,y_space,psy_trial,analytic_solution,pde)
+mape,md,where_md = compare_to_analytic(x_space,psy_trial,analytic_solution,pde)
 
 
 

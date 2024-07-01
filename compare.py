@@ -14,12 +14,13 @@ def compare_to_analytic(x_space,psy_trial,analytic_solution,pde):
 
             psy_t = psy_trial(input_point, net_out)
             surface[i] = psy_t
-            an_surface[i] = analytic_solution([x])
+            an_surface[i] = analytic_solution(x)
     diff = np.max(np.abs(surface-an_surface))
     mape = mean_absolute_percentage_error(an_surface, surface)
     plt.figure()
-    plt.plot(x_space,surface,label='neural','o',color='red')
+    plt.plot(x_space,surface,'o',label='neural',color='red')
     plt.plot(x_space,an_surface,label='analytic',color='green')
+    plt.legend()
     diff = np.abs(an_surface - surface)
     md = np.max(diff)
     where_md = np.where(diff == md)

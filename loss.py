@@ -28,7 +28,7 @@ def loss_function(x, y,pde,psy_trial,f):
             # acobian(jacobian(psy_trial))(input_point, net_out
 
             gradient_of_trial_d2x = psy_t_hessian[0][0]
-            gradient_of_trial_d2y = psy_t_hessian[1][1]
+         #   gradient_of_trial_d2y = psy_t_hessian[1][1]
 
             # D_gradient_of_trial_d2x_D_W0 = grad(outputs=gradient_of_trial_d2x, inputs=pde.fc1.weight, grad_outputs=torch.ones_like(gradient_of_trial_d2x), retain_graph=True)
             # D_gradient_of_trial_d2y_D_W0 = grad(outputs=gradient_of_trial_d2y, inputs=pde.fc1.weight, grad_outputs=torch.ones_like(gradient_of_trial_d2y), retain_graph=True)
